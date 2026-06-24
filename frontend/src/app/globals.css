@@ -1,0 +1,81 @@
+/* Cloudscape global styles are imported in layout.tsx.
+   This file is kept for any app-specific overrides. */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background-layout-main, #f2f3f3);
+}
+
+/* Fix Cloudscape TopNavigation to sit at top */
+#h {
+  position: sticky;
+  top: 0;
+  z-index: 1002;
+}
+
+/* Ensure all input placeholders are non-italic */
+input::placeholder {
+  font-style: normal !important;
+}
+
+/* Override Cloudscape Primary Button → AWS orange pill
+   Using the highest-specificity selector to beat Cloudscape's :not(#\9) trick */
+button[class*="variant-primary"]:not(.awsui_disabled) {
+  background: #ff9900 !important;
+  border-color: #ff9900 !important;
+  color: #0f141a !important;
+  border-radius: 20px !important;
+  font-weight: 700 !important;
+}
+
+button[class*="variant-primary"]:not(.awsui_disabled):hover {
+  background: #ec7211 !important;
+  border-color: #ec7211 !important;
+  color: #0f141a !important;
+}
+
+button[class*="variant-primary"]:not(.awsui_disabled):active {
+  background: #eb5f07 !important;
+  border-color: #eb5f07 !important;
+  color: #0f141a !important;
+}
+
+/* Override text color inside primary button spans */
+button[class*="variant-primary"]:not(.awsui_disabled) span[class*="content"] {
+  color: #0f141a !important;
+}
+
+/* Footer padding to avoid content being hidden behind fixed footer */
+main {
+  padding-bottom: 32px !important;
+}
+
+/* Hide the Cloudscape AppLayout built-in navigation toggle (we use our own in sub-header) */
+button[class*="trigger"][class*="navigation"],
+button[class*="open-button"][class*="navigation"],
+[class*="awsui_show-tools"],
+[class*="navigation-toggle"] {
+  display: none !important;
+}
+
+/* Force Cloudscape AppLayout content to full width when sidebar is closed */
+[class*="awsui_content"][class*="app-layout"] {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* Remove the offset/padding Cloudscape adds for the closed navigation panel */
+[class*="awsui_layout"] > [class*="awsui_layout-main"] {
+  margin-left: 0 !important;
+}
+
+/* Ensure the content wrapper has no left offset */
+[class*="content-wrapper"] {
+  margin-inline-start: 0 !important;
+}
+
+/* Override any Cloudscape layout offset variables */
+[class*="awsui_layout"][class*="app-layout"] {
+  --app-layout-content-offset: 0px !important;
+}
