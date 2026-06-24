@@ -46,14 +46,14 @@ export default function HealthChecksPage() {
         >
           <Table
             columnDefinitions={[
-              { id: 'name', header: 'Name', cell: (item: { name: string }) => item.name },
-              { id: 'status', header: 'Status', cell: (item: { status: string }) => (
+              { id: 'name', header: 'Name', cell: (item: { name: string; status: string; type: string; interval: string }) => item.name },
+              { id: 'status', header: 'Status', cell: (item: { name: string; status: string; type: string; interval: string }) => (
                 <StatusIndicator type={item.status === 'Healthy' ? 'success' : 'error'}>
                   {item.status}
                 </StatusIndicator>
               )},
-              { id: 'type', header: 'Type', cell: (item: { type: string }) => item.type },
-              { id: 'interval', header: 'Interval', cell: (item: { interval: string }) => item.interval },
+              { id: 'type', header: 'Type', cell: (item: { name: string; status: string; type: string; interval: string }) => item.type },
+              { id: 'interval', header: 'Interval', cell: (item: { name: string; status: string; type: string; interval: string }) => item.interval },
             ]}
             items={[
               { name: 'web-server-primary', status: 'Healthy', type: 'HTTP', interval: '30s' },
