@@ -68,7 +68,7 @@ app.include_router(zones_router)
 app.include_router(records_router)
 
 
-@app.get("/", tags=["Health"])
+@app.api_route("/", methods=["GET", "HEAD"], tags=["Health"])
 def health_check():
     """Health check endpoint."""
     return {"status": "ok"}
