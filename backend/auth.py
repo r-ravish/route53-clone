@@ -107,7 +107,8 @@ def register(body: LoginRequest, response: Response, db: Session = Depends(get_d
         key=COOKIE_NAME,
         value=token,
         httponly=True,
-        samesite="lax",
+        secure=True,
+        samesite="none",
         max_age=TOKEN_EXPIRY_HOURS * 3600,
         path="/",
     )
@@ -117,8 +118,16 @@ def register(body: LoginRequest, response: Response, db: Session = Depends(get_d
 
 @router.post("/logout")
 def logout(response: Response):
-    """Clear the access token cookie."""
-    response.delete_cookie(key=COOKIE_NAME, path="/")
+    response.set_cookie(
+        key=COOKIE_NAME,
+        value="",
+        max_age=0,
+        expires=0,
+        path="/",
+        secure=True,
+        httponly=True,
+        samesite="none",
+    )
     return {"detail": "Logged out successfully."}
 
 
